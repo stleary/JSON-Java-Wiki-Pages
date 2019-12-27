@@ -1,0 +1,14 @@
+JSON-Java releases are only for the purpose of checkpointing code changes for the public Maven repository. New releases do not require a fixed cadence. As long as the repository is relatively active, about every 4 months seems reasonable. Urgent fixes may require more frequent releases, but minor fixes and new features can take longer. When you decide to release a new version, here are the recommended steps to follow:
+
+* Decide on a commit checkpoint. Usually this will be the latest commit.
+* Decide on a release label. We do not use semantic versioning for several reasons. Historical Maven releases have been by date, and changing the release label format could cause mis-ordering in the Maven repository. The project is in maintenance mode - no design or major API changes are being accepted, so there are no semantics in the release sequence. Instead we use a date format: YYYYMMDD. Usually this will be the day of the release, since you have to make a file change to README to document the release (see next item).
+* Update the README Release history section with the release number and title. 
+* On GitHub, navigate to Releases > Draft a new release. Enter the release label. Choose the release branch. Usually this will be the master branch. For the title, the release number will suffice. In the description, include a table in reverse chronological order of links to merged pull requests and 1-line descriptions. The top of the list should contain the latest pull request, and the bottom should contain the first pull request after the last release.
+* We do not include binary files in the release. 
+* Create a corresponding tag in the JSON-Java-unit-tests project. Give it the same tag version (YYYYMMDD). The title should read, "Unit tests for JSON-Java release yymmdd". The description should reference a link back to the json java release. You can call it checkpointing, or list the changes, as you wish. Clone and build, just in case.
+* Publish the release.
+* Inform the person responsible for the Maven repository to add a new release. Currently that is bgehrels. Create a new issue titled, "Maven release needed for yyyymmdd" and ask for a repo release. Close the issue when the release is complet  ed.
+
+@BGehrels is responsible for creating new Maven repository releases.
+
+For more information, see [https://help.github.com/articles/creating-releases/](https://help.github.com/articles/creating-releases/)
