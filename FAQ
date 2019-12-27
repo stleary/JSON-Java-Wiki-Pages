@@ -1,0 +1,262 @@
+#### Table of contents
+
+[Who is allowed to submit pull requests for this project?](#who-is-allowed-to-submit-pull-requests-for-this-project)
+
+[How do you decide which pull requests to accept?](#how-do-you-decide-which-pull-requests-to-accept)
+
+[Why isn't support included for Maven, Gradle, or any other tools?](#why-isnt-support-included-for-maven-gradle-or-any-other-tools)
+
+[Why isn't ordering allowed in JSONObjects?](#why-isnt-ordering-allowed-in-jsonobjects)
+
+[Will ordering ever be allowed in JSONObjects?](#will-ordering-ever-be-allowed-in-jsonobjects)
+
+[Where are the unit tests?](#where-are-the-unit-tests)
+
+[What is the goal of this project?](#what-is-the-goal-of-this-project)
+
+[What kind of changes will be accepted for this project?](#what-kind-of-changes-will-be-accepted-for-this-project)
+
+[Some invalid JSON text is allowed by the parser. Shouldn't this be fixed?](#some-invalid-json-text-is-allowed-by-the-parser-shouldnt-this-be-fixed)
+
+[Why doesn't this project have a distributable jar file?](#why-doesnt-this-project-have-a-distributable-jar-file)
+
+[My change fixes a bug. Why won't you accept it?](#my-change-fixes-a-bug-why-wont-you-accept-it)
+
+[I want to add an external lib to the project](#i-want-to-add-an-external-lib-to-the-project)
+
+[Can you help me debug my code?](#can-you-help-me-debug-my-code)
+
+[What version of Java does this project require?](#what-version-of-java-does-this-project-require)
+
+[Can you change the license to remove the "The Software shall be used for Good, not Evil." line?](#can-you-change-the-license-to-remove-the-the-software-shall-be-used-for-good-not-evil-line)
+
+[What API changes are accepted?](#what-api-changes-are-accepted)
+
+[Status of the XML code](#status-of-the-xml-code)
+
+[Complete history of JSON-Java API changes since 2015](#complete-history-of-api-changes-since-2015)
+
+***
+
+## Who is allowed to submit pull requests for this project?
+
+Anyone can submit pull requests. Please read the rest of this FAQ page for guidelines about what kinds of changes are being accepted.
+
+## How do you decide which pull requests to accept?
+
+* Does it call out a bug that needs to be fixed? If so, it goes to the top of the list.
+* Does it fix a major user inconvenience? These are given high priority as well.
+* Does it align with the specs? If not, it will probably not be accepted. It turns out there are gray areas in the specs. If this is in a gray area, it will likely be given the benefit of the doubt.
+* Does it change the behavior of the lib? If so, it will not be accepted, unless it fixes an egregious bug. This is happening less frequently now.
+* Has Douglas Crockford already spoken on this issue? If so, we follow his guidance. No exceptions.
+
+
+## Why isn't support included for Maven, Gradle, or any other tools?
+
+When this app was first written, there was not a single universally agreed upon build tool. This still seems to be the case. Periodically, Maven Repository releases are built and distributed here: [http://mvnrepository.com/artifact/org.json/json](http://mvnrepository.com/artifact/org.json/json)
+
+To build this project you can simply run `javac *.java`. If you want to make your own JAR file for redistribution, you can execute the following commands from the project directory:
+* OSX/Linux
+ * `javac *.java`
+ * `mkdir -p org/json`
+ * `mv *.class org/json`
+ * `jar cf json-java.jar org`
+* Windows
+ * `javac *.java`
+ * `mkdir org\json`
+ * `move *.class org\json`
+ * `jar cf json-java.jar org`
+
+
+## Why isn't ordering allowed in JSONObjects?
+
+Support for ordering is one of the most popular requests, along with adding some type of build support. However, from the JSON spec [RFC 8259](https://tools.ietf.org/html/rfc8259): "An object is an unordered collection of zero or more name/value pairs".  As a reference app, the design is required to stay as close to the spec as possible, so ordering in JSONObjects is not supported.
+
+## Will ordering ever be allowed in JSONObjects?
+
+There are no current plans to support ordering. It is not expected that this will ever change.
+
+## Where are the unit tests?
+
+The unit tests can be found in [https://github.com/stleary/JSON-Java-unit-test](https://github.com/stleary/JSON-Java-unit-test), along with instructions for combining the tests with this app. They are not included in the project for the sake of developers who just want the library code and nothing more. It is not expected that this will ever change. Instructions to quickly and easily clone the 2 projects and execute the tests are included in the unit test project. 
+
+## What is the goal of this project?
+
+* Continue in maintenance mode, in terms of stability, availability, and accessibility of the project
+* Make sure it continues to compile against new Java versions
+* Fix reported bugs.
+* Maintain compatibility with RFC 8259 and ECMA-404
+* Avoid any actions that would affect the ability of users to access and use the software
+* Provide some technical documentation and answer questions regarding the project design and use
+* Provide unit tests
+
+## What kind of changes will be accepted for this project?
+
+* Bug fixes and incompatibilities with the specs are given high priority. 
+* Build enhancements will not be accepted (although build enhancements to the unit tests are welcome).
+* Style and formatting changes will not be accepted.
+* Adding new functionality will be considered. 
+* Changes to existing behavior that has been in place for a substantial period of time will only be accepted in the case of bugs where the existing behavior is clearly worse than the fix. 
+* Changes to recently added features will be evaluated on a case by case basis. 
+* If users report errors due to a bug fix or enhancement, the code change will be reverted.
+
+## Some invalid JSON text is allowed by the parser. Shouldn't this be fixed?
+
+Per design, the JSONObject and JSONArray constructors are more forgiving than required by the spec. However, the toString() methods produce text that is strictly conforming. For example, some strings do not need to be surrounded by quotes when creating a JSONObject, but those strings will be surrounded by quotes when emitted from toString(). This behavior appears to have been part of the lib from the start, and will not be changed. More information about what is allowed can be found in the class-level comments for JSONObject and JSONArray.
+
+## Why doesn't this project have a distributable jar file?
+
+It can be found on maven central. You can download the release version you like from [here](http://repo1.maven.org/maven2/org/json/json/) or [here](https://search.maven.org/#search%7Cga%7C1%7Cg%3Aorg.json%20AND%20a%3Ajson)
+
+## My change fixes a bug. Why won't you accept it?
+
+The most common reason for not accepting a valid bug fix is when it will result in a change 
+to the API or behavior of the code. We want to fix as many bugs as possible, but we also 
+don't want existing users' code to break just because they upgraded to a newer version of 
+the library. Changes to existing behavior will only be accepted in the case of bugs 
+where the existing behavior is clearly worse than the fix.
+
+## I want to add an external lib to the project
+
+One of the strengths of this library is that it has no external dependencies, making it easy
+to include in a project, or on a limited resource platform. There are no plans now, and none
+are expected in the future, to introduce 3rd party libraries.
+
+## Can you help me debug my code?
+
+Simple and straightforward problems may be addressed at the discretion of the project participants, 
+but in most cases it is recommended to post to StackOverflow.com or a similar forum. 
+
+## What version of Java does this project require?
+
+At the present time Java 6 is required, in order to support Android devices. This is not a project 
+requirement but we are going to try to support Android for as long as practical. That means
+we cannot accept pull requests that require Java 7 or greater.
+
+You can see the following PR requests for more information on why we are using Java6 support:
+* https://github.com/stleary/JSON-java/issues/156 (Android API < 19 requires Java6)
+    * As of 2017-07-06, API<19 took up about 9% of Android market share
+* https://github.com/stleary/JSON-java/pull/181 (JSON-Retrotranslated project for old STBs)
+* https://github.com/stleary/JSON-java/pull/195 (VPS hosting only has older Java releases available)
+* https://github.com/stleary/JSON-java/issues/197 (IBM WebSphere Application Server [WAS] versions 8.0 and 8.5)
+    * As of 2017-07-11, Webshere 8.5 is the latest main version available and ships with Java6. However, it can be configured with patches from IBM to run on java 7 or java 8: https://www.ibm.com/developerworks/community/blogs/aimsupport/entry/installing_optional_java_7_x_on_websphere_application_server_8_5_0_0?lang=en
+
+## Can you change the license to remove the "The Software shall be used for Good, not Evil." line?
+
+The library author specified this license, and is the only person authorized to change it.
+
+## What API changes are accepted
+
+If you are considering changing the API, the best place to start is to look at what changes have been accepted in the past. As a rule, we maintain 100% backwards compatibility. Since the project reached maturity, only one public API method has been removed, and that was probably an oversight. Occasionally an argument can be made for adding a new API, or adding capabilities to an existing API. 
+
+**Support for the following types has been added:**
+* BigNumber
+* BigDecimal
+* Enum
+* Float
+* Number
+
+**Parsed data access has been facilitated with these changes:**
+* JSONPointer
+* JSONObject toMap()
+* JSONArray toList()
+
+**User control of parsing has been enhanced:**
+* JSONML, XML keepStrings parameter
+* JSONObject, JSONArray reader parameter
+
+**User control of output has been improved:**
+* JSONArray, JSONObject write() methods
+* XML unescape()
+* XMLToken unescapeEntity()
+
+## Status of the XML code
+
+XML conversions are supported in the JSONML and XML library components. Conversions can be problematic because there is no natural mapping between JSON and XML. There will probably always be requests to change how particular conversions are performed. Some additional latitude in customizing the library is allowed for these cases, as long as the existing default behavior is kept. The preferred implementation is to provide a configuration class to allow overriding certain custom conversions. See for example #412.
+
+## Complete history of API changes since 2015
+
+Release | Pull Request | File | Method | Description 
+---|---|---|---|---
+Not released yet|400| XML.java | public static JSONObject toJSONObject(Reader reader) | New
+.||| public static JSONObject toJSONObject(Reader reader, boolean keepStrings)| New
+.||XMLTokener.java | public XMLTokener(Reader r)| New
+20180130||||
+20181018|362|XMLTokener.java |static String unescapeEntity(String e)|New
+.|337|JSONArray.java|	public float getFloat(int index) throws JSONException|New
+.|||public Number getNumber(int index) throws JSONException|New
+.|||public float optFloat(int index)|New
+.|||public float optFloat(int index, float defaultValue)|New
+.|||public Number optNumber(int index)|New
+.|||public Number optNumber(int index, Number defaultValue)|New
+.||JSONObject|public float getFloat(String key)|New
+.|||public Number getNumber(String key)|New
+.|||public BigDecimal optBigDecimal(String key, BigDecimal defaultValue)|New
+.|||public double optDouble(String key)|New
+.|||public double optDouble(String key, double defaultValue)|New
+.|||public float optFloat(String key)|New
+.|||public float optFloat(String key, float defaultValue)|New
+.|||public Number optNumber(String key)|New
+.|||public Number optNumber(String key, Number defaultValue)|New
+.|336|JSONObject.java (Null)|public int hashCode()|New
+.||JSONObject.java|public JSONObject put(String key, float value)|New
+.|||public JSONPointer(final String pointer)|Add final to String
+.||JSONStringer.java|public String toString()|Add @Override annotation to method
+.||XML.java|public static String toString(final Object object, final String tagName)|Add final to Object, String
+20170516|324|JSONArray.java|public Object query(JSONPointer jsonPointer)|New
+.|||public Object optQuery(JSONPointer jsonPointer)|New
+.||JSONObject.java|public Object query(JSONPointer jsonPointer)|New
+.|||public Object optQuery(JSONPointer jsonPointer)|New
+.|288|XML.java|public static String unescape(String string)|New
+.|||public static Object stringToValue(String string)|Remove @Deprecated annotation
+20160810|261|JSONArray.java|public String toString()|Remove @Override annotation
+20160807|253|JSONML.java|public static JSONArray toJSONArray(String string, boolean keepStrings) throws JSONException|New
+.|||public static JSONArray toJSONArray(XMLTokener x, boolean keepStrings) throws JSONException|New
+.|||public static JSONObject toJSONObject(String string, boolean keepStrings) throws JSONException|New
+.|||public static JSONObject toJSONObject(XMLTokener x, boolean keepStrings)|New
+.||JSONTokener.java|public JSONTokener(InputStream inputStream)|Remove throws JSONException
+.|||public String toString()|Add @Override annotation
+.||XML.java|public static Object stringToValue(String string)|Add @Deprecated annotation
+.|||public static JSONObject toJSONObject(String string, boolean keepStrings) throws JSONException|New
+.|249|JSONArray.java|public String toString()|Add @Override annotation
+.||JSONObject.java (Null)|public String toString()|Add @Override annotation
+.||JSONObject.java|public String toString()|Add @Override annotation
+.|236|JSONTokener.java|public JSONException syntaxError(String message, Throwable causedBy)|New
+.|233|JSONArray.java|public Object optQuery(String jsonPointer)|New
+.||JSONObject|public Object optQuery(String jsonPointer)|New
+.|222|JSONArray.java|public Object query(String jsonPointer)|New
+.||JSONObject.java|public Object query(String jsonPointer)|New
+.||JSONPointer.java|public class JSONPointer|New class
+.||JSONPointerException.java|public class JSONPointerException|New class
+.|203|JSONArray.java|public List<Object> toList()|New
+.||JSONObject.java|public Map<String, Object> toMap()|New
+20160212|185|JSONArray.java|public Writer write(Writer writer, int indentFactor, int indent)|Change to public
+.||JSONObject.java|public Writer write(Writer writer, int indentFactor, int indent)|Change to public
+20151123|159|JSONException.java|public JSONException(final String message)|Final String
+.|||public JSONException(final String message, final Throwable cause)|New
+.|||public JSONException(final Throwable cause)|Change to final
+.|||public Throwable getCause()|**REMOVED** to use super class implementation
+.|153|JSONArray.java|public JSONArray(Collection<?> collection) // change from <Object> to <?>
+.|||public JSONArray put(Collection<?> value)|From <Object> to <?>
+.|||public JSONArray put(Map<?, ?> value)|From <Object,Object> to <?,?>
+.|||public JSONArray put(int index, Collection<?> value) throws JSONException|From <Object> to <?>
+.|||public JSONArray put(int index, Map<?, ?> value) throws JSONException|From <Object,Object> to <?,?>
+.||JSONObject.java|public JSONObject(Map<?, ?> map)|From <Object,Object> to <?,?>
+.|||public JSONObject put(String key, Collection<?> value) throws JSONException|From <Object> to <?>
+.|||public JSONObject put(String key, Map<?, ?> value) throws JSONException|From <Object,Object> to <?,?>
+20150729|140|JSONArray.java|public <E extends Enum<E>> E getEnum(Class<E> clazz, int index) throws JSONException|New
+.|||public <E extends Enum<E>> E optEnum(Class<E> clazz, int index)|New
+.|||public <E extends Enum<E>> E optEnum(Class<E> clazz, int index, E defaultValue)|New
+.||JSONObject|public <E extends Enum<E>> E getEnum(Class<E> clazz, String key) throws JSONException|New
+.|||public <E extends Enum<E>> E optEnum(Class<E> clazz, String key)|New
+.|||public <E extends Enum<E>> E optEnum(Class<E> clazz, String key, E defaultValue)|New
+.|135|JSONArray.java|public BigDecimal getBigDecimal (int index) throws JSONException|New
+.|||public BigInteger getBigInteger (int index) throws JSONException|New
+.|||public BigInteger optBigInteger(int index, BigInteger defaultValue)|New
+.|||public BigDecimal optBigDecimal(int index, BigDecimal defaultValue)|New
+.||JSONObject.java|public BigInteger getBigInteger(String key) throws JSONException|New
+.|||public BigDecimal getBigDecimal(String key) throws JSONException|New
+.|||public BigInteger optBigInteger(String key, BigInteger defaultValue)|New
+.|||public BigDecimal optBigDecimal(String key, BigDecimal defaultValue)|New
+.|132|JSONArray.java|public class JSONArray implements Iterable<Object>|Made iterable
+.|||public Iterator<Object> iterator()|New
