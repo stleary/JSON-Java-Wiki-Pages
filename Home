@@ -1,0 +1,44 @@
+# Welcome to the JSON-java wiki! A reference application to demonstrate parsing JSON in Java
+
+## Introduction
+JSON-Java is a reference application for reading and writing JSON docs in Java. It was written by Douglas Crockford, who first specified the JSON document format. It works by parsing and storing JSON text inside of POJOs - [Plain Old Java Objects](https://en.wikipedia.org/wiki/Plain_old_Java_object). This allows your Java code to navigate into the doc, read,  update, and write the JSON document. 
+
+## Getting Started
+These are the primary classes, which you will interact with the most:
+* JSONObject: Stores JSON objects, which are enclosed in curly braces. A simple JSON object looks something like this:
+
+    ``{ "hello" : "world" }``
+
+  The most basic JSONObject API methods are:
+
+    ``// Parse a JSON object from a String. There is also a constructor to parse an object from a stream.
+    JSONObject jsonObject = new JSONObject("{ \"hello\" : \"world\" }");``
+
+    ``// Write a JSON document as a string. There is also an API to write to a stream.
+    jsonObject.toString();``
+
+
+  You can also use the JSONObject get(), opt(), and put() methods to update the JSONObject.
+
+* JSONArray: Stores JSON arrays, which are enclosed in square brackets. A simple JSON array looks something like this:
+
+    ``[ "hello", "world" ]``
+
+  The most basic JSONArray API methods are:
+    
+    ``// Parse a JSON array from a String. There is also a constructor to parse an array from a stream.
+    JSONArray jsonArray = new JSONArray("[ \\"hello\" : \\"world\\" ]");``
+
+    ``// Write a JSON document as a string. There is also an API to write to a stream.
+    jsonArray.toString();``
+    
+  You can also use the JSONArray get(), opt(), and put() methods to update the JSONObject.
+
+### Basic Operations
+
+
+
+
+
+## Additional Capabilities
+
