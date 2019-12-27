@@ -1,0 +1,57 @@
+If you want to easily create a Jar file after you clone the repository, it can be done with [Apache Ant](http://ant.apache.org/) using the following `build.xml` file:
+
+```xml
+<?xml version="1.0"?>
+<project name="JSON-java" default="dist" basedir=".">
+   <property name="jar" value="JSON-java.jar"/>
+
+   <target name="build">
+      <javac srcdir="." destdir="." includes="*.java" deprecation="yes" includeantruntime="false">
+         <compilerarg value="-Xlint:unchecked"/>
+      </javac>
+   </target>
+
+   <target name="dist" depends="build">
+      <jar destfile="${jar}">
+         <fileset dir="." includes="**/*.class"/>
+      </jar>
+   </target>
+</project>
+```
+
+After cloning, save the content above on a file called `build.xml` and just type:
+
+```
+$ ant 
+```
+
+And there you go, you have a new `JSON-java.jar` file (the name can be changed on the `name` property) with the correct package directory structure, like this:
+
+```
+$ jar tf JSON-java.jar 
+META-INF/
+META-INF/MANIFEST.MF
+org/
+org/json/
+org/json/CDL.class
+org/json/Cookie.class
+org/json/CookieList.class
+org/json/HTTP.class
+org/json/HTTPTokener.class
+org/json/JSONArray.class
+org/json/JSONException.class
+org/json/JSONML.class
+org/json/JSONObject$1.class
+org/json/JSONObject$Null.class
+org/json/JSONObject.class
+org/json/JSONPointer$Builder.class
+org/json/JSONPointer.class
+org/json/JSONPointerException.class
+org/json/JSONString.class
+org/json/JSONStringer.class
+org/json/JSONTokener.class
+org/json/JSONWriter.class
+org/json/Property.class
+org/json/XML.class
+org/json/XMLTokener.class
+```
