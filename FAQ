@@ -54,7 +54,7 @@ Anyone can submit pull requests. Please read the rest of this FAQ page for guide
 
 ## How are vulnerabilities and exploits handled?
 
-If you think you have found a vulnernability - a weakness in the code that could be subject to attack - please open a public issue in the repository. This allows the entire community to understand the scope and come up with the best way to address the problem. 
+If you think you have found a vulnerability - a weakness in the code that could be subject to attack - please open a public issue in the repository. This allows the entire community to understand the scope and come up with the best way to address the problem. 
 
 If you have evidence of a zero day exploit - an example where someone has successfully compromised the code in the wild - then it is OK to withhold details when posting the issue. In that case you can contact the project owner directly with the exploit details.
 
