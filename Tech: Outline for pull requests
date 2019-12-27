@@ -1,0 +1,27 @@
+**What problem does this code solve?**
+
+**Risks**
+
+**Changes to the API?**
+
+**Will this require a new release?**
+
+**Should the documentation be updated?**
+
+**Does it break the unit tests?**
+
+**Was any code refactored in this commit?**
+
+**Review status**
+
+
+Notes:
+
+The "problem" may just be an enhancement, it does not have to be a bug fix.
+
+In most cases a new release is not required.
+
+After the code has been tested and reviewed, you can set the review status to something like, "ACCEPTED, Starting 3 day comment window", and then do the merge after 3 days. Minimum comment period is:
+- None for emergency commits
+- 3 days by default
+- 7 days for complex, risky, or behavior-changing commits
