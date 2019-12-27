@@ -1,0 +1,33 @@
+## History of JSON-Java and Android
+
+The JSON Specification was originally made in 2001 on the http://json.org/ website and was subsequently codified in [RFC 4627](https://tools.ietf.org/html/rfc4627) (later updated in [RFC 7159](https://tools.ietf.org/html/rfc7159)) and the source code for this project was maintained on the http://json.org/ website until December 2010 when Douglas Crockford uploaded it to this repository.
+
+In March 2010, Android implemented a "cleanroom" implementation of this project's API. This means that as of March 2010, this project and Android had the same classes and the same public method definitions. However, this GitHub project does not necessarily match the original implementation as done by the Android team (`JSONTokener.end()` is an example of an API method in this repository that is not in Android).
+
+Since March 2010, Android has kept nearly the same API, only adding the `JSONObject.wrap` method. However, the API for this project has been extended to include many new features including support for BigDecimal, BigInteger, Enums, etc.
+
+As both APIs use the org.json namespace, these API differences sometimes make it hard to reuse code between the two projects and today there are known incompatibilities between them.
+
+## JSON-Java Compatibility:
+
+At the present time, JSON-Java maintains a level of Java JDK compatibility that allows it to be used by Android developers. This is not a project commitment, but it will be maintained for as long as possible.
+
+### Classes that can NOT be used with Android
+* JSONString: Android does not have support for this interface. If your classes implement this interface and are used on Android, the JSONObject and JSONArray classes will not output your implementation of `toJSONString()`
+
+### Naming conflict with JSON-Java:
+
+Android has the following classes defined:
+* JSON.java: unique to Android no conflict
+* JSONArray.java: conflict
+* JSONException.java: conflict
+* JSONObject.java: conflict
+* JSONStringer.java: conflict
+* JSONTokener.java: conflict
+
+The Android SDK already includes a subset of JSON-Java functionality. The Android package name is org.json, which conflicts with this project. Even if Android works with us to fix this problem, there is still the problem of this code being included in existing Android releases.  So, here are some workarounds:
+* If all you want is basic, no-frills functionality, with no recent bug fixes, then just use the built in Android package.
+* If you want to include the JSON-Java lib for functionality only found in JSON-Java. For example, XML-JSON transformations provided by XML.java and other classes, then this may result in run time errors due to the conflict between the built-in org.json package and the JSON-Java org.json package. In this case, you may wish to refactor the JSON-Java source and build/import a local version of JSON-Java with a different package name.
+* For the XML problem, you may wish to try the workaround found here, where the problem is solved using a recursive copy:
+https://github.com/AppWerft/Ti.XML2Json/blob/master/android/src/de/appwerft/remotexml/JSON.java
+* PR [#350](https://github.com/stleary/JSON-java/pull/350) modifies the library to better support the API as ported to Android. To use the code in the PR you would need to NOT use this library's classes that are provided by Android (JSONArray, JSONException, JSONObject, JSONStringer, JSONTokener). By excluding these classes, your code and the remaining classes in this library would use the classes provided by Android. One known incompatibility still remaining in the PR is that the Android JSONException class only provides a single constructor `JSONException(String)` and does not provide the options to pass exception causes. If your code never hits an exception, then this should not be an issue, but if it does, some places in the code may instead try to call `JSONException(String, Throwable)` or `JSONException(Throwable)` which are not available. This will cause a `java.lang.NoSuchMethodError` exception to be thrown instead.
