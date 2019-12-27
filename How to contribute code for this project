@@ -1,0 +1,5 @@
+New and current contributors to JSON-Java are welcome!
+
+Please read the [FAQ](https://github.com/stleary/JSON-java/wiki/FAQ) to understand what types of enhancements and bug fixes can be accepted. 
+
+In addition to submitting your code change in a pull request, you will also need to ensure your code passes the unit tests, found in [this link](https://github.com/stleary/JSON-Java-unit-test). Instructions on how to build and execute the unit tests are found in the Readme for that project. If the unit tests do not all pass, then you will need to update the tests (or modify your code) until they do pass. If you modify the unit tests, please open a pull request on that project, and reference your contribution in the JSON-Java project. 
