@@ -1,0 +1,16 @@
+
+This GitHub repository was created in 2010 by Douglas Crockford, who wrote the original JSON specification. In Feb 2015, he posted a request in the README to find a new owner. I have managed the repository under Douglas' guidance from Mar 2015 until Jan 2016, when ownership was transferred.
+
+My goals since Mar 2015, and going forward:
+* Continue in maintenance mode, in terms of stability, availability, and accessibility of the project
+* Make sure it continues to compile against new Java versions
+* Fix reported bugs.
+* Maintain compatibility with RFC 7159 and ECMA-404
+* Avoid any actions that would affect the ability of users to access and use the software
+* Provide some technical documentation and answer questions regarding the project design and use
+* Provide unit tests
+
+Enhancements and bug fixes require a compelling use case, unit tests, review (most pull requests remain open for comments for 3 days or more). Changes that might inconvenience existing users are strongly discouraged.
+
+Thanks,
+Sean Leary
