@@ -4,6 +4,8 @@
 
 [How do you decide which pull requests to accept?](#how-do-you-decide-which-pull-requests-to-accept)
 
+[How are vulnerabilities and exploits handled?](#how-are-vulnerabilities-and-exploits-handled)
+
 [Why isn't support included for Maven, Gradle, or any other tools?](#why-isnt-support-included-for-maven-gradle-or-any-other-tools)
 
 [Why isn't ordering allowed in JSONObjects?](#why-isnt-ordering-allowed-in-jsonobjects)
@@ -50,6 +52,11 @@ Anyone can submit pull requests. Please read the rest of this FAQ page for guide
 * Does it change the behavior of the lib? If so, it will not be accepted, unless it fixes an egregious bug. This is happening less frequently now.
 * Has Douglas Crockford already spoken on this issue? If so, we follow his guidance. No exceptions.
 
+## How are vulnerabilities and exploits handled?
+
+If you think you have found a vulnerability - a weakness in the code that could be subject to attack - please open a public issue in the repository. This allows the entire community to understand the scope and come up with the best way to address the problem. 
+
+If you have evidence of a zero day exploit - an example where someone has successfully compromised the code in the wild - then it is OK to withhold details when posting the issue. In that case you can contact the project owner directly with the exploit details.
 
 ## Why isn't support included for Maven, Gradle, or any other tools?
 
